@@ -4,9 +4,9 @@ from smile_msgs.srv import Greet
 
 def cb(request, response):
     if request.name == "joker":
-        response.age == 44
+        response.age = 44
     else :
-        response.age == 0
+        response.age = 0
 
     return response
 
