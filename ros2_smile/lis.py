@@ -11,7 +11,7 @@ def main():
 
     req = Greet.Request()
     req.name = "joker"
-    furure = client.call_async(req)
+    future = client.call_async(req)
     while rclpy.ok():
         rclpy.spin_once(node)
         if future.done():
@@ -20,7 +20,7 @@ def main():
             except:
                 node.get_logger().info('failse call')
             else:
-                node.get_logger().info("age: []".format(response.age))
+                node.get_logger().info("age: {}".format(response.age))
                 
             break
 
