@@ -21,7 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             "talker = ros2_smile.talker:main",
-            #"listener = ros2_smile.listener:main",
+            "listener = ros2_smile.listener:main",
         ],
     },
 )
