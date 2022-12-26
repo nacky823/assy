@@ -13,10 +13,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='nacky',
+    maintainer='NAGAKI Yuki',
     maintainer_email='youjiyongmu4@gmail.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='A ros2 package that makes you smile.',
+    license='BSD-3-Clause',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
