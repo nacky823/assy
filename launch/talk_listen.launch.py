@@ -7,7 +7,8 @@ def generate_launch_description():
 
     talker = launch_ros.actions.Node(
         package = 'ros2_smile',
-        executable = 'talker'
+        executable = 'talker',
+        output = 'screen'
         )
     listener = launch_ros.actions.Node(
         package = 'ros2_smile',
