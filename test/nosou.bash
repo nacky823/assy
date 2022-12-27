@@ -10,6 +10,6 @@ ls -A
 colcon build
 source $dir/.bashrc
 
-timeout 5 ros2 launch ros2_smile talk_listen.launch.py > /tmp/ros2_smile.log
-cat /tmp/ros2_smile.log
-#grep 'age=15'
+timeout 10 ros2 launch ros2_smile talk_listen.launch.py > /tmp/ros2_smile.log
+cat /tmp/ros2_smile.log |
+grep 'Listen: 10'
