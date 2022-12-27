@@ -1,20 +1,23 @@
 import rclpy
 from  rclpy.node import Node
-from std_msgs.msg import Int16
+from std_msgs.msg import String
 
-n = 0
 
 rclpy.init()
 node = Node("talker")
-pub = node.create_publisher(Int16, "/countup", 10)
+pub = node.create_publisher(String, "/str/input", 10)
 
 
 def cb():
-    global n
-    msg = Int16()
-    msg.data = n
+    txt = input()
+    msg = String()
+    msg.data = txt
     pub.publish(msg)
-    n += 1
+    print(msg)
+#    if txt == '' :
+#        print("please input one word")
+#    else :
+#        print("txt")
 
 
 node.create_timer(0.5, cb)
