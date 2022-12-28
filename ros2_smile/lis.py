@@ -1,16 +1,16 @@
 import rclpy
 from rclpy.node import Node
-from smile_msgs.srv import Greet
+from example_interfaces.srv import AddTwoInts
 
 def main():
     rclpy.init()
     node = Node("lis")
-    client = node.create_client(Greet, "/greet")
+    client = node.create_client(AddTwoInts, "/greet")
     while not client.wait_for_service(timeout_sec=1.0):
         node.get_logger().info('waiting...')
 
-    req = Greet.Request()
-    req.name = "joker"
+    req = AddTwoInts.Request()
+    req.a = 3
     future = client.call_async(req)
     while rclpy.ok():
         rclpy.spin_once(node)
@@ -20,7 +20,7 @@ def main():
             except:
                 node.get_logger().info('failse call')
             else:
-                node.get_logger().info("age: {}".format(response.age))
+                node.get_logger().info("addtest: {}".format(response.sum))
                 
             break
 

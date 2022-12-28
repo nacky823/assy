@@ -12,4 +12,4 @@ source $dir/.bashrc
 
 timeout 4 ros2 launch ros2_smile srv.launch.py > /tmp/ros2_smile.log
 cat /tmp/ros2_smile.log |
-grep 'age: 44'
+grep 'addtest: 56'
