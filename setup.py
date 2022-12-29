@@ -30,7 +30,7 @@ setup(
             "tac = ros2_smile.tac:main",
             "lic = ros2_smile.lic:main",
             "client = ros2_smile.client:main",
-            "time_zone = ros2_smile.time_zone:main",
+            "times = ros2_smile.times:main",
         ],
     },
 )

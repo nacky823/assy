@@ -5,7 +5,7 @@ import datetime
 
 class Service():
     def __init__(self, nh):
-        srv = nh.create_service(Spawn, "/time", self.cb)
+        srv = nh.create_service(Spawn, "/times", self.cb)
 
     def cb(self, req, res):    
         if req.name == "now":

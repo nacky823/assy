@@ -4,7 +4,7 @@ from turtlesim.srv import Spawn
 
 class Client():
     def __init__(self, nh):
-        self.cli = nh.create_client(Spawn, "/time")
+        self.cli = nh.create_client(Spawn, "/times")
         while not self.cli.wait_for_service(timeout_sec=1.0):
             nh.get_logger().info("waitting...")
 
