@@ -3,13 +3,17 @@ from rclpy.node import Node
 from turtlesim.srv import Spawn
 
 
-def cb(req, res):
-    if req.name == "now":
-        res.name = "夜"
-    else:
-        res.name = "nolibra"
+class Service():
+    def __init__(self, nh):
+        self.srv = nh.create_service(Spawn, "/time_zone", self.cb)
 
-    return res
+    def cb(self, req, res):    
+        if req.name == "now":
+            res.name = "夜"
+        else:
+            res.name = "nolibra"
+    
+        return res
 
 
 
@@ -17,8 +21,9 @@ def cb(req, res):
 def main():
     rclpy.init()
     node = Node("time_zone")
-    srv = node.create_service(Spawn, "/time_zone", cb)
+    service = Service(node)
     rclpy.spin(node)
+    rclpy.shutdown()
 
 if __name__ == "__main__":
     main()
