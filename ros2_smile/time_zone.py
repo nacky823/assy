@@ -21,11 +21,16 @@ class Service():
         time_zone = datetime.timezone(time_diff)
         now = datetime.datetime.now(time_zone)
         now_h_m = now.strftime("%H:%M")
-        print(now_h_m)
         if now.hour >= 4 and now.hour <= 9:
             separate = "m"
-            print(separate)
-        
+        elif now.hour >= 10 and now.hour <= 17:
+            separate = "d"
+        elif now.hour >= 18 and now.hour <= 23:
+            separate = "n"
+        elif now.hour >= 0 and now.hour <= 3:
+            separate = "n"
+        send = str(now_h_m) + separate
+        print(send)
 
 
 
