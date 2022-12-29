@@ -6,7 +6,7 @@ class Client():
     def __init__(self, nh):
         self.cli = nh.create_client(Spawn, "/times")
         while not self.cli.wait_for_service(timeout_sec=1.0):
-            print("waitting...")
+            print("waitting for service...")
 
     def request(self):
         req = Spawn.Request()
@@ -20,7 +20,7 @@ class Client():
                 try:
                     self.res = self.future.result()
                 except:
-                    nh.get_logger().info("failed to response")
+                    nh.get_logger().info("failed to response.")
                 else:
                     print(format(self.res.name))
                 break
