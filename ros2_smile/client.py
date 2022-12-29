@@ -18,7 +18,7 @@ class Client():
             rclpy.spin_once(nh)
             if self.future.done():
                 try:
-                    self.res = self.future()
+                    self.res = self.future.result()
                 except:
                     nh.get_logger().info("failed to response")
                 else:
