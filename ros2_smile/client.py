@@ -4,13 +4,13 @@ from turtlesim.srv import Spawn
 
 class Client():
     def __init__(self, nh):
-        self.client = nh.create_client(Spawn, "now_time")
+        self.client = nh.create_client(Spawn, "/time_zone")
         while not self.client.wait_for_service(timeout_sec=1.0):
             nh.get_logger().info("waitting...")
 
     def request(self):
         self.req = Spawn.Request()
-        self.req.name = "now_time"
+        self.req.name = "now"
         self.future = self.client.call_async(self.req)
         
     def response(self, nh)
