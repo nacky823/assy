@@ -20,7 +20,10 @@ class Service():
         time_diff = datetime.timedelta(hours=JST_MINUS_UTC)
         time_zone = datetime.timezone(time_diff)
         now = datetime.datetime.now(time_zone)
-        print(now)
+        now_h_m = now.strftime("%H:%M")
+        print(now_h_m)
+        
+
 
 
 
