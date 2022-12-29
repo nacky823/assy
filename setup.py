@@ -27,6 +27,8 @@ setup(
             "listener = ros2_smile.listener:main",
             "tas = ros2_smile.tas:main",
             "lis = ros2_smile.lis:main",
+            "tac = ros2_smile.tac:main",
+            "lic = ros2_smile.lic:main",
         ],
     },
 )

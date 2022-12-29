@@ -2,11 +2,9 @@ import rclpy
 from  rclpy.node import Node
 from std_msgs.msg import String
 
-
 rclpy.init()
 node = Node("talker")
 pub = node.create_publisher(String, "/str/input", 10)
-
 
 def cb():
     txt = input()
@@ -14,11 +12,6 @@ def cb():
     msg.data = txt
     pub.publish(msg)
     print(msg)
-#    if txt == '' :
-#        print("please input one word")
-#    else :
-#        print("txt")
-
 
 node.create_timer(0.5, cb)
 rclpy.spin(node)
