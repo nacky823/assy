@@ -6,13 +6,13 @@ class Client():
     def __init__(self, nh):
         self.cli = nh.create_client(Spawn, "/times")
         while not self.cli.wait_for_service(timeout_sec=1.0):
-            nh.get_logger().info("waitting...")
+            print("waitting...")
 
     def request(self):
-        self.req = Spawn.Request()
-        self.req.name = "now"
-        self.future = self.cli.call_async(self.req)
-        
+        req = Spawn.Request()
+        req.name = "now"
+        self.future = self.cli.call_async(req)
+
     def response(self, nh):
         while rclpy.ok():
             rclpy.spin_once(nh)
@@ -22,7 +22,7 @@ class Client():
                 except:
                     nh.get_logger().info("failed to response")
                 else:
-                    nh.get_logger().info("{}".format(self.res.name))
+                    print(format(self.res.name))
                 break
 
 def main():
