@@ -13,7 +13,7 @@ class Client():
         self.req.name = "now"
         self.future = self.cli.call_async(self.req)
         
-    def response(self, nh)
+    def response(self, nh):
         while rclpy.ok():
             rclpy.spin_once(nh)
             if self.future.done():
