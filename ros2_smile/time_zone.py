@@ -5,41 +5,30 @@ import datetime
 
 class Service():
     def __init__(self, nh):
-        srv = nh.create_service(Spawn, "/now_time", self.cb)
+        srv = nh.create_service(Spawn, "/time", self.cb)
 
     def cb(self, req, res):    
         if req.name == "now":
-            res.name = "夜"
+            res.name = self.times()
         else:
             res.name = "Unable to meet request."
 
         return res
 
-    def nt(self):
+    def times(self):
         JST_MINUS_UTC = 9
         time_diff = datetime.timedelta(hours=JST_MINUS_UTC)
         time_zone = datetime.timezone(time_diff)
         now = datetime.datetime.now(time_zone)
-        now_h_m = now.strftime("%H:%M")
-        if now.hour >= 4 and now.hour <= 9:
-            separate = "m"
-        elif now.hour >= 10 and now.hour <= 17:
-            separate = "d"
-        elif now.hour >= 18 and now.hour <= 23:
-            separate = "n"
-        elif now.hour >= 0 and now.hour <= 3:
-            separate = "n"
-        send = str(now_h_m) + separate
-        print(send)
+        nowhm = now.strftime("%H:%M")
+        send = str(nowhm) + "," + str(now.hour)
 
-
-
+        return send
 
 def main():
     rclpy.init()
     node = Node("time_zone")
     service = Service(node)
-    service.nt()
     rclpy.spin(node)
     rclpy.shutdown()
 
