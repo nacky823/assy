@@ -5,7 +5,7 @@ import datetime
 
 class Service():
     def __init__(self, nh):
-        srv = nh.create_service(Spawn, "/time_zone", self.cb)
+        srv = nh.create_service(Spawn, "/now_time", self.cb)
 
     def cb(self, req, res):    
         if req.name == "now":
@@ -15,9 +15,11 @@ class Service():
 
         return res
 
-    def tz(self):
+    def nt(self):
         JST_MINUS_UTC = 9
-        now = datetime.timedelta(hours=9)
+        time_diff = datetime.timedelta(hours=JST_MINUS_UTC)
+        time_zone = datetime.timezone(time_diff)
+        now = datetime.datetime.now(time_zone)
         print(now)
 
 
@@ -26,7 +28,7 @@ def main():
     rclpy.init()
     node = Node("time_zone")
     service = Service(node)
-    service.tz()
+    service.nt()
     rclpy.spin(node)
     rclpy.shutdown()
 
