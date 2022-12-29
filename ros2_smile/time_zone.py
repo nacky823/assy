@@ -22,6 +22,9 @@ class Service():
         now = datetime.datetime.now(time_zone)
         now_h_m = now.strftime("%H:%M")
         print(now_h_m)
+        if now.hour >= 4 and now.hour <= 9:
+            separate = "m"
+            print(separate)
         
 
 
