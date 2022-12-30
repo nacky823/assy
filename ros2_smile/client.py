@@ -50,12 +50,21 @@ class TimeClient():
             elif hour >= 0 and hour <= 3:
                 print("早く寝ましょう！（笑）")
 
+class SelectClient():
+    def __init__(self, nh):
+        self.sel = nh.create_client(Spawn, "/selection")
+        while not self.sel.wait_for_service(timeout_sec=1.0):
+            print("waitting for service...")
+
+
+
 def main():
     rclpy.init()
     node = Node("client")
     time = TimeClient(node)
     time.request()
     time.response(node)
+    select = SelectClient(node)
     time.response(node)
     node.destroy_node()
     rclpy.shutdown()
