@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 from glob import glob
 
-package_name = 'ros2_smile'
+package_name = 'assy'
 
 setup(
     name=package_name,
@@ -18,20 +18,14 @@ setup(
     zip_safe=True,
     maintainer='NAGAKI Yuki',
     maintainer_email='youjiyongmu4@gmail.com',
-    description='A ros2 package that makes you smile.',
+    description='A ros2 package.',
     license='BSD-3-Clause',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "talker = ros2_smile.talker:main",
-            "listener = ros2_smile.listener:main",
-            "tas = ros2_smile.tas:main",
-            "lis = ros2_smile.lis:main",
-            "tac = ros2_smile.tac:main",
-            "lic = ros2_smile.lic:main",
-            "client = ros2_smile.client:main",
-            "times = ros2_smile.times:main",
-            "order = ros2_smile.order:main",
+            "client = assy.client:main",
+            "times = assy.times:main",
+            "order = assy.order:main",
         ],
     },
 )
