@@ -32,7 +32,7 @@ class Service():
 
 def main():
     rclpy.init()
-    node = Node("time_zone")
+    node = Node("times")
     service = Service(node)
     while not service.res_cnt == service.MAX_RES_CNT:
         rclpy.spin_once(node)
