@@ -10,7 +10,7 @@ class Service():
         srv = nh.create_service(Spawn, "/selection", self.cb)
 
     def cb(self, req, res):    
-        if req.name == "The selection entered.":
+        if req.name == "p":
             res.name = "connect"
         else:
             res.name = "Unable to meet request."
