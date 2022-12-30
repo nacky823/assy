@@ -12,4 +12,4 @@ jobs:
           cd /root/ros2_ws
           rosdep update
           rosdep install -i --from-path src --rosdistro humble -y 
-          bash -xv ./src/assy/test/et.bash
+          bash -xv ./src/assy/test/test.bash /root
