@@ -2,18 +2,17 @@ import rclpy
 from rclpy.node import Node
 from turtlesim.srv import Spawn
 
-class Service():
+class SelectService():
     def __init__(self, nh):
-        self.end_srv = 0
-        self.select = "init"
-        srv = nh.create_service(Spawn, "/selection", self.cb)
+        self.repeat = 1
+        srv = nh.create_service(Spawn, "/select", self.cb)
 
     def cb(self, req, res):    
         if req.name == "p":
-            self.select = req.name
+            self.sel = req.name
             res.name = "connect"
         elif req.name == "ending_password_hogehoge_soiya":
-            self.end_srv = 1
+            self.repeat = 0
             res.name = "end"
         else:
             res.name = "Unable to meet request."
@@ -22,12 +21,10 @@ class Service():
 
 def main():
     rclpy.init()
-    node = Node("selection")
-    service = Service(node)
-
-    while service.end_srv == 0:
+    node = Node("order")
+    service = SelectService(node)
+    while service.repeat == 1:
         rclpy.spin_once(node)
-
     node.destroy_node()
     rclpy.shutdown()
 

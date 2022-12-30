@@ -53,12 +53,13 @@ class TimeClient():
                 print("早く寝ましょう！（笑）")
                 print("ゆっくり休んでくださいね (*^ ^*)")
 
+
 class SelectClient():
     def __init__(self, nh):
         self.repeat = 1
         self.end_failure = 1
         self.selection_failure = 1
-        self.sel = nh.create_client(Spawn, "/selection")
+        self.sel = nh.create_client(Spawn, "/select")
 
     def intro_txt(self):
         print("以下の表を参考に、キーボードからコマンドを入力してください。")

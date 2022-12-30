@@ -31,7 +31,7 @@ setup(
             "lic = ros2_smile.lic:main",
             "client = ros2_smile.client:main",
             "times = ros2_smile.times:main",
-            "selection = ros2_smile.selection:main",
+            "order = ros2_smile.order:main",
         ],
     },
 )
