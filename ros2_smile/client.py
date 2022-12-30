@@ -56,6 +56,24 @@ class SelectClient():
         while not self.sel.wait_for_service(timeout_sec=1.0):
             print("waitting for service...")
 
+    def request(self):
+        req = Spawn.Request()
+        req.name = "selection"
+        self.future = self.sel.call_async(req)
+
+    def response(self, nh):
+        while rclpy.ok():
+            rclpy.spin_once(nh)
+            if self.future.done():
+                try:
+                    self.res = self.future.result()
+                except:
+                    nh.get_logger().info("failed to response.")
+                else:
+                    print(self.res.name)
+                break
+
+
 
 
 def main():
@@ -65,6 +83,8 @@ def main():
     time.request()
     time.response(node)
     select = SelectClient(node)
+    select.request()
+    select.response(node)
     time.response(node)
     node.destroy_node()
     rclpy.shutdown()
