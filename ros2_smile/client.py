@@ -52,13 +52,38 @@ class TimeClient():
 
 class SelectClient():
     def __init__(self, nh):
+        self.selection_failure = 1
         self.sel = nh.create_client(Spawn, "/selection")
+
+    def intro_txt(self):
+        print("以下の表を参考に、キーボードからコマンドを入力してください。")
+        print("\n###=====================================================###\n")
+        print("・ゲーム１ :")
+        print("    「p」を入力した後、「Enter」を押してください。")
+        print("\n###=====================================================###\n")
+        print("Please input here :\n")
+
+    def input_key(self):
+        if self.key == "p":
+            print("選択肢１が選択されました。")
+        else:
+            print(self.key, "は選択肢にありません。")
+            print("再度入力をお願いします。")
+            self.selection_failure = 1
+
+    def select(self):
+        print("ご要望をお伺いします。")
+        while self.selection_failure == 1:
+            self.selection_failure = 0
+            self.intro_txt()
+            self.key = input()
+            self.input_key()
         while not self.sel.wait_for_service(timeout_sec=1.0):
             print("waitting for service...")
 
     def request(self):
         req = Spawn.Request()
-        req.name = "The selection entered."
+        req.name = self.key
         self.future = self.sel.call_async(req)
 
     def response(self, nh):
@@ -83,6 +108,7 @@ def main():
     time.request()
     time.response(node)
     select = SelectClient(node)
+    select.select()
     select.request()
     select.response(node)
     time.response(node)
