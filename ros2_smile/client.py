@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from turtlesim.srv import Spawn
 
-class Client():
+class TimeClient():
     def __init__(self, nh):
         self.res_cnt = 0
         self.cli = nh.create_client(Spawn, "/times")
@@ -53,10 +53,10 @@ class Client():
 def main():
     rclpy.init()
     node = Node("client")
-    client = Client(node)
-    client.request()
-    client.response(node)
-    client.response(node)
+    time = TimeClient(node)
+    time.request()
+    time.response(node)
+    time.response(node)
     node.destroy_node()
     rclpy.shutdown()
 
