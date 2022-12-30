@@ -38,9 +38,11 @@ class TimeClient():
             elif hour >= 18 and hour <= 23:
                 print("こんばんは。")
             elif hour >= 0 and hour <= 3:
+                print("こんばんは。")
                 print("夜更かしですか？（笑）")
             print("現在の時刻は", res_txt[0], "です。")
         elif self.res_cnt == 2:
+            print("現在の時刻は", res_txt[0], "です。")
             if hour >= 4 and hour <= 9:
                 print("素敵な一日になりますように ( ^ ^ )")
             elif hour >= 10 and hour <= 17:
@@ -49,9 +51,12 @@ class TimeClient():
                 print("ゆっくり休んでくださいね (*^ ^*)")
             elif hour >= 0 and hour <= 3:
                 print("早く寝ましょう！（笑）")
+                print("ゆっくり休んでくださいね (*^ ^*)")
 
 class SelectClient():
     def __init__(self, nh):
+        self.repeat = 1
+        self.end_failure = 1
         self.selection_failure = 1
         self.sel = nh.create_client(Spawn, "/selection")
 
@@ -61,9 +66,10 @@ class SelectClient():
         print("・ゲーム１ :")
         print("    「p」を入力した後、「Enter」を押してください。")
         print("\n###=====================================================###\n")
-        print("Please input here :\n")
+        print("Please input here : ", end="")
 
     def input_key(self):
+        print("\n")
         if self.key == "p":
             print("選択肢１が選択されました。")
         else:
@@ -98,8 +104,22 @@ class SelectClient():
                     print(self.res.name)
                 break
 
-
-
+    def end(self):
+        while self.end_failure == 1:
+            print("続けて使用しますか？")
+            print("続けて使用する場合は「y」")
+            print("終了する場合は「n」")
+            print("を入力してください。")
+            self.end_failure = 0
+            print("Please input here : ", end="")
+            end_key = input()
+            if end_key == "y":
+                self.repeat = 1
+                self.selection_failure = 1
+            elif end_key == "n":
+                self.repeat = 0
+            else:
+                self.end_failure = 1
 
 def main():
     rclpy.init()
@@ -109,9 +129,11 @@ def main():
     time.response(node)
     select = SelectClient(node)
 
-    select.select()
-    select.request()
-    select.response(node)
+    while select.repeat == 1:
+        select.select()
+        select.request()
+        select.response(node)
+        select.end()
 
     time.request()
     time.response(node)
