@@ -58,7 +58,7 @@ class SelectClient():
 
     def request(self):
         req = Spawn.Request()
-        req.name = "selection"
+        req.name = "The selection entered."
         self.future = self.sel.call_async(req)
 
     def response(self, nh):
