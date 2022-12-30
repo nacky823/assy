@@ -6,10 +6,10 @@ class TimeClient():
     def __init__(self, nh):
         self.res_cnt = 0
         self.cli = nh.create_client(Spawn, "/times")
-        while not self.cli.wait_for_service(timeout_sec=1.0):
-            print("waitting for service...")
 
     def request(self):
+        while not self.cli.wait_for_service(timeout_sec=1.0):
+            print("waitting for service...")
         req = Spawn.Request()
         req.name = "now"
         self.future = self.cli.call_async(req)
@@ -111,6 +111,7 @@ def main():
     select.select()
     select.request()
     select.response(node)
+    time.request()
     time.response(node)
     node.destroy_node()
     rclpy.shutdown()
