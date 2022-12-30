@@ -4,6 +4,7 @@ from turtlesim.srv import Spawn
 
 class Client():
     def __init__(self, nh):
+        self.res_cnt = 0
         self.cli = nh.create_client(Spawn, "/times")
         while not self.cli.wait_for_service(timeout_sec=1.0):
             print("waitting for service...")
@@ -19,17 +20,42 @@ class Client():
             if self.future.done():
                 try:
                     self.res = self.future.result()
+                    self.res_cnt += 1
                 except:
                     nh.get_logger().info("failed to response.")
                 else:
-                    print(format(self.res.name))
+                    self.greet()
                 break
+
+    def greet(self):
+        res_txt = self.res.name.split(",")
+        hour = int(res_txt[1])
+        if self.res_cnt == 1:
+            if hour >= 4 and hour <= 9:
+                print("おはようございます。")
+            elif hour >= 10 and hour <= 17:
+                print("こんにちは。")
+            elif hour >= 18 and hour <= 23:
+                print("こんばんは。")
+            elif hour >= 0 and hour <= 3:
+                print("夜更かしですか？（笑）")
+            print("現在の時刻は", res_txt[0], "です。")
+        elif self.res_cnt == 2:
+            if hour >= 4 and hour <= 9:
+                print("素敵な一日になりますように ( ^ ^ )")
+            elif hour >= 10 and hour <= 17:
+                print("また遊びに来てくださいね ( ^-^ )/ ")
+            elif hour >= 18 and hour <= 23:
+                print("ゆっくり休んでくださいね (*^ ^*)")
+            elif hour >= 0 and hour <= 3:
+                print("早く寝ましょう！（笑）")
 
 def main():
     rclpy.init()
     node = Node("client")
     client = Client(node)
     client.request()
+    client.response(node)
     client.response(node)
     node.destroy_node()
     rclpy.shutdown()
