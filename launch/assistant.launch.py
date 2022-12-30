@@ -5,11 +5,6 @@ import launch_ros.actions
 
 def generate_launch_description():
 
-    client = launch_ros.actions.Node(
-        package = 'ros2_smile',
-        executable = 'client',
-        output = 'screen'
-        )
     times = launch_ros.actions.Node(
         package = 'ros2_smile',
         executable = 'times',
@@ -19,5 +14,5 @@ def generate_launch_description():
         executable = 'selection',
         )
 
-    return launch.LaunchDescription([ client, times, selection ])
+    return launch.LaunchDescription([ times, selection ])
 
