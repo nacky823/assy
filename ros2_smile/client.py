@@ -108,9 +108,11 @@ def main():
     time.request()
     time.response(node)
     select = SelectClient(node)
+
     select.select()
     select.request()
     select.response(node)
+
     time.request()
     time.response(node)
     node.destroy_node()

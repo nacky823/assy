@@ -5,7 +5,7 @@ import datetime
 
 class Service():
 
-    MAX_RES_CNT = 1
+    MAX_RES_CNT = 2
     DIFF_UTC = 9
 
     def __init__(self, nh):
