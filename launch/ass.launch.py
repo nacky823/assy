@@ -6,11 +6,11 @@ import launch_ros.actions
 def generate_launch_description():
 
     times = launch_ros.actions.Node(
-        package = 'ros2_smile',
+        package = 'assy',
         executable = 'times',
         )
     order = launch_ros.actions.Node(
-        package = 'ros2_smile',
+        package = 'assy',
         executable = 'order',
         )
 
