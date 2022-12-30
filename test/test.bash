@@ -22,15 +22,15 @@ ng () {
 res=0
 
 hour=`date +'%H'`
-timeout 2 ros2 run assy times &
-timeout 2 ros2 service call /times turtlesim/srv/Spawn "name: now" > /tmp/ros2_smile.log
+timeout 3 ros2 run assy times &
+timeout 3 ros2 service call /times turtlesim/srv/Spawn "name: now" > /tmp/ros2_smile.log
 cat /tmp/ros2_smile.log |
 grep 'turtlesim.srv.Spawn_Response(name=' |
 grep $hour
 [ "$?" = 0 ] || ng ${LINENO}
 
-timeout 2 ros2 launch assy ass.launch.py &
-timeout 2 ros2 run assy client > /tmp/ros2_smile.log
+timeout 3 ros2 launch assy ass.launch.py &
+timeout 3 ros2 run assy client > /tmp/ros2_smile.log
 cat /tmp/ros2_smile.log |
 grep '現在の時刻は' |
 grep $hour
