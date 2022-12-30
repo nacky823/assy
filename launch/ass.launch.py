@@ -9,10 +9,10 @@ def generate_launch_description():
         package = 'ros2_smile',
         executable = 'times',
         )
-    selection = launch_ros.actions.Node(
+    order = launch_ros.actions.Node(
         package = 'ros2_smile',
-        executable = 'selection',
+        executable = 'order',
         )
 
-    return launch.LaunchDescription([ times, selection ])
+    return launch.LaunchDescription([ times, order ])
 
