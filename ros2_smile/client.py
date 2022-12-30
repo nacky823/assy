@@ -78,7 +78,9 @@ class SelectClient():
             self.selection_failure = 1
 
     def select(self):
+        self.end_failure = 1
         print("ご要望をお伺いします。")
+        print(self.selection_failure)
         while self.selection_failure == 1:
             self.selection_failure = 0
             self.intro_txt()
@@ -104,7 +106,7 @@ class SelectClient():
                     print(self.res.name)
                 break
 
-    def end(self):
+    def end(self, nh):
         while self.end_failure == 1:
             print("続けて使用しますか？")
             print("続けて使用する場合は「y」")
@@ -117,6 +119,9 @@ class SelectClient():
                 self.repeat = 1
                 self.selection_failure = 1
             elif end_key == "n":
+                self.key = "ending_password_hogehoge_soiya"
+                self.request()
+                self.response(nh)
                 self.repeat = 0
             else:
                 self.end_failure = 1
@@ -133,7 +138,7 @@ def main():
         select.select()
         select.request()
         select.response(node)
-        select.end()
+        select.end(node)
 
     time.request()
     time.response(node)

@@ -12,19 +12,13 @@ class Service():
         if req.name == "p":
             self.select = req.name
             res.name = "connect"
-        elif req.name == "z":
-            self.select = req.name
+        elif req.name == "ending_password_hogehoge_soiya":
+            self.end_srv = 1
             res.name = "end"
         else:
             res.name = "Unable to meet request."
 
         return res
-
-    def end(self):
-        if self.select == "z":
-            self.end_srv = 1
-
-
 
 def main():
     rclpy.init()
@@ -33,7 +27,6 @@ def main():
 
     while service.end_srv == 0:
         rclpy.spin_once(node)
-        service.end()
 
     node.destroy_node()
     rclpy.shutdown()
