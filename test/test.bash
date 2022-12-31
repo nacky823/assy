@@ -56,3 +56,8 @@ if [ "$hour" -le "3" -a "0" -ge "$hour" ]; then
     [ "$?" = 0 ] || ng ${LINENO}
 fi
 
+timeout 10 ros2 launch assy cnt.launch.py > /tmp/assy.log
+cat /tmp/assy.log |
+grep 'Count second : 8 [s]'
+[ "$?" = 0 ] || ng ${LINENO}
+
