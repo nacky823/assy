@@ -64,7 +64,7 @@ class SelectService():
 
 def main():
     rclpy.init()
-    node = Node("order")
+    node = Node("quiz")
     service = SelectService(node)
     while service.repeat == 1:
         rclpy.spin_once(node)

@@ -9,10 +9,19 @@ def generate_launch_description():
         package = 'assy',
         executable = 'times',
         )
-    order = launch_ros.actions.Node(
+    quiz = launch_ros.actions.Node(
         package = 'assy',
-        executable = 'order',
+        executable = 'quiz',
+        )
+    sub = launch_ros.actions.Node(
+        package = 'assy',
+        executable = 'sub',
+        output = 'screen',
+        )
+    pub = launch_ros.actions.Node(
+        package = 'assy',
+        executable = 'pub',
         )
 
-    return launch.LaunchDescription([ times, order ])
+    return launch.LaunchDescription([ times, quiz, sub, pub ])
 

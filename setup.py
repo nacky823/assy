@@ -25,7 +25,9 @@ setup(
         'console_scripts': [
             "client = assy.client:main",
             "times = assy.times:main",
-            "order = assy.order:main",
+            "quiz = assy.quiz:main",
+            "sub = assy.sub:main",
+            "pub = assy.pub:main",
         ],
     },
 )
