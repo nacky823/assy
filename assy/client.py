@@ -30,6 +30,7 @@ class TimeClient():
     def greet(self):
         res_txt = self.res.name.split(",")
         hour = int(res_txt[1])
+        print("")
         if self.res_cnt == 1:
             if hour >= 4 and hour <= 9:
                 print("おはようございます。")
@@ -42,7 +43,7 @@ class TimeClient():
                 print("夜更かしですか？（笑）")
             print("\n現在の時刻は", res_txt[0], "です。\n")
         elif self.res_cnt == 2:
-            print("\n現在の時刻は", res_txt[0], "です。\n")
+            print("現在の時刻は", res_txt[0], "です。\n")
             if hour >= 4 and hour <= 9:
                 print("素敵な一日になりますように ( ^ ^ )")
             elif hour >= 10 and hour <= 17:
@@ -71,7 +72,7 @@ class SelectClient():
         print("Please input here : ", end="")
 
     def input_key(self):
-        print("\n")
+        print("")
         if self.key == "x":
             print("クイズ X を開始します。")
         elif self.key == "y":
@@ -172,7 +173,7 @@ class SelectClient():
             self.end_failure = 0
             print("Please input here : ", end="")
             end_key = input()
-            print("\n")
+            print("")
             if end_key == "y":
                 self.repeat = 1
                 self.selection_failure = 1
