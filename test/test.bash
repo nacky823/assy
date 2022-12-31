@@ -36,7 +36,23 @@ grep '現在の時刻は' |
 grep $hour
 [ "$?" = 0 ] || ng ${LINENO}
 
-timeout 3 ros2 launch assy ass.launch.py &
-timeout 3 ros2 run assy client
-echo -e "p\n" > /tmp/assy.log
-cat /tmp/assy.log
+timeout 6 ros2 launch assy ass.launch.py &
+yes tests | head -n3 | timeout 6 ros2 run assy client > /tmp/assy.log
+
+if [ "$hour" -le "9" -a "$hour" -ge "4" ]; then
+    cat /tmp/assy.log | grep '素敵な一日になりますように ( ^ ^ )'
+    [ "$?" = 0 ] || ng ${LINENO}
+fi
+if [ "$hour" -le "17" -a "$hour" -ge "10" ]; then
+    cat /tmp/assy.log | grep 'また遊びに来てくださいね ( ^-^ )/'
+    [ "$?" = 0 ] || ng ${LINENO}
+fi
+if [ "$hour" -le "23" -a "$hour" -ge "18" ]; then
+    cat /tmp/assy.log | grep 'ゆっくり休んでくださいね (*^ ^*)'
+    [ "$?" = 0 ] || ng ${LINENO}
+fi
+if [ "$hour" -le "3" -a "$hour" -ge "0" ]; then
+    cat /tmp/assy.log | grep '早く寝ましょう！（笑）'
+    [ "$?" = 0 ] || ng ${LINENO}
+fi
+

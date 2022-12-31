@@ -40,7 +40,7 @@ class TimeClient():
             elif hour >= 0 and hour <= 3:
                 print("こんばんは。")
                 print("夜更かしですか？（笑）")
-            print("現在の時刻は", res_txt[0], "です。")
+            print("\n現在の時刻は", res_txt[0], "です。\n")
         elif self.res_cnt == 2:
             print("現在の時刻は", res_txt[0], "です。")
             if hour >= 4 and hour <= 9:
@@ -64,24 +64,30 @@ class SelectClient():
     def intro_txt(self):
         print("以下の表を参考に、キーボードからコマンドを入力してください。")
         print("\n###=====================================================###\n")
-        print("・ゲーム１ :")
-        print("    「p」を入力した後、「Enter」を押してください。")
+        print("\n  ・クイズ X : 「x」を入力した後、「Enter」を入力してください。")
+        print("\n  ・クイズ Y : 「y」を入力した後、「Enter」を入力してください。")
+        print("\n  ・クイズ Z : 「z」を入力した後、「Enter」を入力してください。")
         print("\n###=====================================================###\n")
         print("Please input here : ", end="")
 
     def input_key(self):
         print("\n")
-        if self.key == "p":
-            print("選択肢１が選択されました。")
+        if self.key == "x":
+            print("クイズ X を開始します。")
+        elif self.key == "y":
+            print("クイズ Y を開始します。")
+        elif self.key == "z":
+            print("クイズ Z を開始します。")
+        elif self.key == "tests":
+            print("skip input key")
         else:
-            print(self.key, "は選択肢にありません。")
-            print("再度入力をお願いします。")
+            print("  ", self.key, "は選択肢にありません。")
+            print("再度入力をお願いします。\n")
             self.selection_failure = 1
 
     def select(self):
         self.end_failure = 1
-        print("ご要望をお伺いします。")
-        print(self.selection_failure)
+        print("ご要望をお伺いします。\n")
         while self.selection_failure == 1:
             self.selection_failure = 0
             self.intro_txt()
@@ -104,12 +110,41 @@ class SelectClient():
                 except:
                     nh.get_logger().info("failed to response.")
                 else:
+                    print("\n###=====================================================###\n")
                     print(self.res.name)
+                    self.ans_txt()
+                    print("\n###=====================================================###\n")
                 break
+
+    def ans_txt(self):
+        if self.key == x:
+            print("「xa」: 泣く。")
+            print("「xb」: よし。何もなかった。")
+            print("「xc」: ZZZ...")
+            print("「xa」「xb」「xc」から一つを入力し、「Enter」を入力してください。\n")
+        elif self.key == y:
+            print("「ya」: 全力で閉めてあげる。")
+            print("「yb」: こっそり閉めてあげる。")
+            print("「yc」: 気になるが、声をかける勇気はない。")
+            print("「ya」「yb」「yc」から一つを入力し、「Enter」を入力してください。\n")
+        elif self.key == z:
+            print("「za」: 席をお譲りする。")
+            print("「zb」: 気になるが、声をかける勇気はない。")
+            print("「zc」: 眠い。寝よう。")
+            print("「za」「zb」「zc」から一つを入力し、「Enter」を入力してください。\n")
+
+    def ans(self):
+        print("Please input here : ", end="")
+        self.key = input()
+        self.input_key()
+        self.request()
+        self.response()
+        print("楽しめましたか？（笑）\n")
+
 
     def end(self, nh):
         while self.end_failure == 1:
-            print("続けて使用しますか？")
+            #print("続けて使用しますか？")
             print("続けて使用する場合は「y」")
             print("終了する場合は「n」")
             print("を入力してください。")
@@ -119,8 +154,8 @@ class SelectClient():
             if end_key == "y":
                 self.repeat = 1
                 self.selection_failure = 1
-            elif end_key == "n":
-                self.key = "ending_password_hogehoge_soiya"
+            elif end_key == "n" or end_key == "tests":
+                self.key = "ending"
                 self.request()
                 self.response(nh)
                 self.repeat = 0
@@ -139,6 +174,7 @@ def main():
         select.select()
         select.request()
         select.response(node)
+        select.ans()
         select.end(node)
 
     time.request()
