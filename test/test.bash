@@ -56,8 +56,94 @@ if [ "$hour" -le "3" -a "0" -ge "$hour" ]; then
     [ "$?" = 0 ] || ng ${LINENO}
 fi
 
-timeout 10 ros2 launch assy cnt.launch.py > /tmp/assy.log
+timeout 6 ros2 launch assy cnt.launch.py > /tmp/assy.log
 cat /tmp/assy.log |
-grep 'Count second : 8 [s]'
+grep 'Count second : 4'
 [ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: z" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '電車に乗っているとき、自分は座っていて'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: y" > /tmp/assy.log
+cat /tmp/assy.log |
+grep 'リュックサックのチャックが全開の人を見たとき'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: x" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '締め切りが明日だという事を'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: za" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '正解だと思います。優しいですね( ^ ^ )'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: zb" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '正解だと思います。私もこの選択をしそうです。'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: zc" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '大正解だと思います。毎日お疲れ様です。'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: ya" > /tmp/assy.log
+cat /tmp/assy.log |
+grep 'かなりやばい行動なのでやめましょう。'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: yb" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '全力に負けず劣らずのやばさですね'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: yc" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '私も同じ意見なので気が合いますね'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: xa" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '素直で素敵な性格だと思います'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: xb" > /tmp/assy.log
+cat /tmp/assy.log |
+grep 'そう、何もなかった。何もなかったのだ。'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: xc" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '朝が怖いですね、想像するのもいやなので'
+[ "$?" = 0 ] || ng ${LINENO}
+
+timeout 3 ros2 run assy quiz &
+ros2 service call /select turtlesim/srv/Spawn "name: ending" > /tmp/assy.log
+cat /tmp/assy.log |
+grep '全てのプログラムを終了しました'
+[ "$?" = 0 ] || ng ${LINENO}
+
+
+
+
+
+
+
+
 
