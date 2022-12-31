@@ -39,7 +39,7 @@ class SelectService():
             res.name = self.xc
 
         elif req.name == "ending":
-            res.name = "end"
+            res.name = "全てのプログラムを終了しました。\n\nご使用頂きありがとうございます。"
             self.repeat = 0
         else:
             res.name = "Unable to meet request."
