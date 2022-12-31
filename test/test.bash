@@ -142,10 +142,20 @@ grep '全てのプログラムを終了しました'
 timeout 3 ros2 launch assy ass.launch.py &
 yes x | head -n3 | timeout 3 ros2 run assy client > /tmp/assy.log
 cat /tmp/assy.log |
-grep 'よし。何もなかった。'
+grep '締め切りが明日だという事'
 [ "$?" = 0 ] || ng ${LINENO}
 
+timeout 3 ros2 launch assy ass.launch.py &
+yes y | head -n3 | timeout 3 ros2 run assy client > /tmp/assy.log
+cat /tmp/assy.log |
+grep 'リュックサックのチャックが全開'
+[ "$?" = 0 ] || ng ${LINENO}
 
+timeout 3 ros2 launch assy ass.launch.py &
+yes z | head -n3 | timeout 3 ros2 run assy client > /tmp/assy.log
+cat /tmp/assy.log |
+grep '電車に乗っているとき、自分は座っていて'
+[ "$?" = 0 ] || ng ${LINENO}
 
 
 
