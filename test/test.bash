@@ -139,7 +139,11 @@ cat /tmp/assy.log |
 grep '全てのプログラムを終了しました'
 [ "$?" = 0 ] || ng ${LINENO}
 
-
+timeout 3 ros2 launch assy ass.launch.py &
+yes x | head -n3 | timeout 3 ros2 run assy client > /tmp/assy.log
+cat /tmp/assy.log |
+grep 'よし。何もなかった。'
+[ "$?" = 0 ] || ng ${LINENO}
 
 
 
