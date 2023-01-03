@@ -1,4 +1,4 @@
-#!/bin/bash -i
+#!/bin/bash
 # SPDX-FileCopyrightText: 2022 NAGAKI Yuki
 # SPDX-License-Identifier: BSD-3-Clause
 echo $-
