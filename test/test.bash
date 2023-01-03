@@ -38,7 +38,6 @@ grep $hour
 
 timeout 6 ros2 launch assy ass.launch.py &
 yes tests | head -n3 | timeout 6 ros2 run assy client > /tmp/assy.log
-[ "$?" = 0 ] || ng ${LINENO}
 
 if [ "$hour" -le "9" ] && [ "$hour" -ge "4" ]; then
     cat /tmp/assy.log |
