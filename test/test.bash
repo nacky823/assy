@@ -38,21 +38,23 @@ grep $hour
 
 timeout 6 ros2 launch assy ass.launch.py &
 yes tests | head -n3 | timeout 6 ros2 run assy client > /tmp/assy.log
+[ "$?" = 0 ] || ng ${LINENO}
 
-if [ "$hour" -le "9" -a "4" -ge "$hour" ]; then
-    cat /tmp/assy.log | grep '素敵な一日になりますように ( ^ ^ )'
+if [ "$hour" -le "9" ] && [ "$hour" -ge "4" ]; then
+    cat /tmp/assy.log |
+    grep '素敵な一日になりますように'
     [ "$?" = 0 ] || ng ${LINENO}
-fi
-if [ "$hour" -le "17" -a "10" -ge "$hour" ]; then
-    cat /tmp/assy.log | grep 'また遊びに来てくださいね ( ^-^ )/'
+elif [ "$hour" -le "17" ] && [ "$hour" -ge "10" ]; then
+    cat /tmp/assy.log |
+    grep 'また遊びに来てくださいね'
     [ "$?" = 0 ] || ng ${LINENO}
-fi
-if [ "$hour" -le "23" -a "18" -ge "$hour" ]; then
-    cat /tmp/assy.log | grep 'ゆっくり休んでくださいね (*^ ^*)'
+elif [ "$hour" -le "23" ] && [ "$hour" -ge "18" ]; then
+    cat /tmp/assy.log |
+    grep 'ゆっくり休んでくださいね'
     [ "$?" = 0 ] || ng ${LINENO}
-fi
-if [ "$hour" -le "3" -a "0" -ge "$hour" ]; then
-    cat /tmp/assy.log | grep '早く寝ましょう！（笑）'
+elif [ "$hour" -le "3" ] && [ "$hour" -ge "0" ]; then
+    cat /tmp/assy.log |
+    grep '早く寝ましょう'
     [ "$?" = 0 ] || ng ${LINENO}
 fi
 
